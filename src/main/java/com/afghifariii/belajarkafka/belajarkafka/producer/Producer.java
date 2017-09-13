@@ -46,19 +46,21 @@ public class Producer {
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, value);
 
         return Observable.from(producer.send(record));
+
     }
 
     public void run() {
-        Observable.interval(1, TimeUnit.SECONDS)
+        Observable.interval(5, TimeUnit.SECONDS)
                 .map(Object::toString)
                 .flatMap(this::send)
                 .subscribe(result -> {
                   log.info("Message sent to partition {}", result.partition());
-                });
+        });
+
     }
 
     public static void main (String [] args) throws IOException {
-        new Producer("topic-belajar-kafka").run();
+        new Producer("belajar-kafka").run();
 
         System.in.read();
     }

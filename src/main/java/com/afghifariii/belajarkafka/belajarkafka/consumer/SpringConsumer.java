@@ -17,7 +17,7 @@ public class SpringConsumer {
     @Slf4j
     @Component
     public static class ConsumerApp {
-        @KafkaListener(topics = "topic-belajar-kafka", group = "belajar-kafka")
+        @KafkaListener(topics = "multi_partition", group = "belajar-kafka")
         public void listen(ConsumerRecord<String, String> record){
             log.info("Recieve {}:{} from partition {}", record.key(), record.value(), record.partition());
         }
